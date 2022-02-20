@@ -1,0 +1,15 @@
+.container {
+  background: var(--secondary-300);
+  height: 56px;
+  border-radius: 10px;
+  border: 0;
+  padding: 0 16px;
+  color: var(--white);
+  width: 100%;
+  font-weight: 500;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: var(--secondary-400);
+  }
+}

@@ -28,7 +28,9 @@
     "rules": {
       "prettier/prettier": "error",
       "react/react-in-jsx-scope": "off",
+      "react/jsx-no-constructed-context-values": "off",
       "react-hooks/rules-of-hooks": "error",
+      "react/function-component-definition":"off",
       "react-hooks/exhaustive-deps": "warn",
       "react/jsx-one-expression-per-line": "off",
       "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
