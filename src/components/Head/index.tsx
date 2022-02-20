@@ -1,10 +1,14 @@
 import React from 'react';
 import HeadDefault from 'next/head';
 
-const Head: React.FC = () => {
+interface HeadProps {
+  title?: string;
+}
+
+const Head: React.FC<HeadProps> = ({ title }) => {
   return (
     <HeadDefault>
-      <title>Autenticação com NextJs</title>
+      <title>{title || 'Autenticação com NextJs'}</title>
     </HeadDefault>
   );
 };

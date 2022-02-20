@@ -26,7 +26,8 @@
       "@utils/*": ["./src/utils/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@services/*": ["./src/services/*"],
-      "@entities/*": ["./src/entities/*"]
+      "@entities/*": ["./src/entities/*"],
+      "@enums/*": ["./src/enums/*"]
     }
   },
   "include": [

@@ -53,7 +53,7 @@ export default function Home() {
 
   return (
     <>
-      <Head />
+      <Head title="Login" />
 
       <main className={styles.container}>
         <Form ref={formRef} onSubmit={handleSubmit}>
