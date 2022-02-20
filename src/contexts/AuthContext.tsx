@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useState } from 'react';
-import { setCookie } from 'nookies';
+import { createContext, ReactNode, useState, useEffect } from 'react';
+import { setCookie, parseCookies, destroyCookie } from 'nookies';
 import Router from 'next/router';
 
 import { api } from '@services/api';
@@ -24,9 +24,33 @@ type AuthProviderProps = {
 
 export const AuthContext = createContext({} as AuthContextData);
 
+export function signOut() {
+  destroyCookie(undefined, CoockiesEnum.TOKEN);
+  destroyCookie(undefined, CoockiesEnum.REFRESH_TOKEN);
+
+  Router.push(PagesEnum.LOGIN);
+}
+
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>(null);
   const isAuthenticated = !!user;
+
+  useEffect(() => {
+    const { [CoockiesEnum.TOKEN]: token } = parseCookies();
+
+    if (token) {
+      api
+        .get('/me')
+        .then(response => {
+          const { email, permissions, roles } = response.data;
+
+          setUser({ email, permissions, roles });
+        })
+        .catch(() => {
+          signOut();
+        });
+    }
+  }, []);
 
   async function signIn({ email, password }: SignInCredentials) {
     try {
@@ -52,6 +76,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         permissions,
         roles,
       });
+
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
 
       Router.push(PagesEnum.DASHBOARD);
     } catch (err) {
