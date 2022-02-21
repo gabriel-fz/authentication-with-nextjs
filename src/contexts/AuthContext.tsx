@@ -1,8 +1,9 @@
+/* eslint-disable import/no-cycle */
 import { createContext, ReactNode, useState, useEffect } from 'react';
 import { setCookie, parseCookies, destroyCookie } from 'nookies';
 import Router from 'next/router';
 
-import { api } from '@services/api';
+import { api } from '@services/apiClient';
 import { User } from '@entities/User';
 import PagesEnum from '@enums/PagesEnum';
 import CoockiesEnum from '@enums/CoockiesEnum';

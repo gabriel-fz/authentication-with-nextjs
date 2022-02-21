@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 
 import getValidationErrors from '@utils/getValidationErrors';
 import { AuthContext } from '@contexts/AuthContext';
+import { withSSRGuest } from '@utils/withSSRGuest';
 
 import Head from '@components/Head';
 import Input from '@components/Input';
@@ -74,3 +75,9 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = withSSRGuest(async ctx => {
+  return {
+    props: {},
+  };
+});
